@@ -15,38 +15,38 @@ class Program
 
         HashSet<string> alreadyCompared = new();
 
-		OptionSet p = new()
+        OptionSet p = new()
         {
-			"Usage: imgcmp [OPTIONS] FILES",
-			"Image Comparison",
-			"",
-			"Options:",
-			{ "pixel-error-tolerance=", "Pixel Error Tolerance", (string v) => pixelErrorTolerance = double.Parse(v) },
-			{ "verbose",  "Print Debugging Messages", v => verbose = v != null },
-			{ "h|help",  "Show this Message and Exit", v => showHelp = v != null }
-		};
+            "Usage: imgcmp [OPTIONS] FILES",
+            "Image Comparison",
+            "",
+            "Options:",
+            { "pixel-error-tolerance=", "Pixel Error Tolerance", (string v) => pixelErrorTolerance = double.Parse(v) },
+            { "verbose",  "Print Debugging Messages", v => verbose = v != null },
+            { "h|help",  "Show this Message and Exit", v => showHelp = v != null }
+        };
 
-		List<string> extra;
+        List<string> extra;
 
-		try
+        try
         {
-			extra = p.Parse(args);
-		}
-		catch (OptionException e)
+            extra = p.Parse(args);
+        }
+        catch (OptionException e)
         {
-			Console.Write("imgcmp: ");
-			Console.WriteLine(e.Message);
-			Console.WriteLine("Try 'imgcmp --help' for more information.");
+            Console.Write("imgcmp: ");
+            Console.WriteLine(e.Message);
+            Console.WriteLine("Try 'imgcmp --help' for more information.");
 
-			return;
-		}
+            return;
+        }
 
-		if (showHelp || extra is null || extra.Count == 0)
+        if (showHelp || extra is null || extra.Count == 0)
         {
-			p.WriteOptionDescriptions(Console.Out);
+            p.WriteOptionDescriptions(Console.Out);
 
             Environment.Exit(0);
-		}
+        }
 
         foreach (string src in extra)
         {
